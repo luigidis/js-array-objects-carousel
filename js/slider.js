@@ -36,15 +36,54 @@ let slides = [
 			'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.',
 	},
 ]
+let index = 0;
+let slidesElement = [];
 
-slides.forEach(slide => {
-	console.log(slide.url, slide.title, slide.description)
-	let markupToAdd = `<li class="slide active">
-							<img src="${slide.url}" alt="">
-							<div class="slide__content">
-								<h3 class="slide__title">${slide.title}</h3>
-								<p class="slide__description">${slide.description}</p>
-							</div>
-  						</li>`
-	ulElement.innerHTML += markupToAdd
-})
+// console.log(slidesMarkup)
+
+//Genero il contenuto dello slider
+for (let i = 0; i < slides.length; i++) {
+    const src = slides[i].url;
+    // console.log(src);
+    // Creo il'li
+    const li = document.createElement('li');
+    // Aggiungo la classe slide a questo li
+    li.className = 'slide';
+    // gli metto la classe active
+    if (i === index) {
+        li.classList.add('active');
+    };
+    // Creo l'immagine
+    const img = document.createElement('img');
+    // assegno all'immagine creata il valore letto dall'array
+    img.src = src;
+    // console.dir(img);
+	// creo il div per lo slide content
+	const divAbsolute = document.createElement('div')
+	// aggiungo la classe all'immagine
+	divAbsolute.classList.add('slide__content')
+	// creo l'h3 e il paragrafo
+	const titleSlide = slides[i].title;
+	const descriptionSlide = slides[i].description;
+
+	// const title = document.createElement('h3');
+	divAbsolute.innerHTML += `<h3 class="slide__title">${titleSlide}</h3>`
+	
+	// const description = document.createElement('p')
+	divAbsolute.innerHTML += `<p class="slide__description">${descriptionSlide}</p>`
+    // a questo punto appendo l'immagine dentro l'li creato
+    li.append(img, divAbsolute);
+    // Appendo il mio li creato con l'img dentro allo slide wrapper precendentemente selezionato
+    ulElement.append(li);
+    // le inserisco nel mio array vuoto precedentemente
+    slidesElement.push(li);
+}
+
+
+	
+	
+
+
+
+
+
