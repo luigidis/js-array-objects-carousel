@@ -65,12 +65,10 @@ for (let i = 0; i < slides.length; i++) {
 	// creo l'h3 e il paragrafo
 	const titleSlide = slides[i].title;
 	const descriptionSlide = slides[i].description;
-
 	// const title = document.createElement('h3');
-	divAbsolute.innerHTML += `<h3 class="slide__title">${titleSlide}</h3>`
-	
+	divAbsolute.innerHTML += `<h3 class="slide__title">${titleSlide}</h3>`;
 	// const description = document.createElement('p')
-	divAbsolute.innerHTML += `<p class="slide__description">${descriptionSlide}</p>`
+	divAbsolute.innerHTML += `<p class="slide__description">${descriptionSlide}</p>`;
     // a questo punto appendo l'immagine dentro l'li creato
     li.append(img, divAbsolute);
     // Appendo il mio li creato con l'img dentro allo slide wrapper precendentemente selezionato
@@ -78,10 +76,60 @@ for (let i = 0; i < slides.length; i++) {
     // le inserisco nel mio array vuoto precedentemente
     slidesElement.push(li);
 }
+// dichiaro con una variabile l'ultimo item dell'array dove pusho i miei elementi
+let lastItem = slidesElement.length - 1
+// Seleziono la mia freccia next
+const nextArrowEl = document.querySelector('.arrow-next');
+// Devo ascoltare l'evento click sulla arrow next
+nextArrowEl.addEventListener('click', function () {
+    // console.log('tasto next premuto');
+    // togliere la classe active della slide attiva
+    const slideAttiva = slidesElement[index];
+    // console.log(slideAttiva);
+    slideAttiva.classList.remove('active');
+    // mi vado a inizializzare la slideSuccessiva e a fare un controllo dell'index per ripetere il ciclo delle immagini
+    let slideSuccessiva
+    if (index === lastItem) {
+        index = 0
+    } else {
+        index++
+    }
+    // aggiungere la classe active alla slide successiva (se esiste)
+    slideSuccessiva = slidesElement[index];
+    // console.log(slideSuccessiva);
+    slideSuccessiva.classList.add('active');
+}); 
+// Seleziono la mia freccia prev
+const prevArrowEl = document.querySelector('.arrow-prev');
+// Devo ascoltare l'evento click sulla arrow previous
+prevArrowEl.addEventListener('click', function() {
+    // console.log('tasto prev premuto');
+    // tolgo la classe active dalla slide attiva che in questo caso sarà
+    const slideAttiva = slidesElement[index];
+    // console.log(slideAttiva);
+    slideAttiva.classList.remove('active');
+    // mi vado a inizializzare la slidePrecedente e a fare un controllo sull'index per ripete il ciclo delle img
+    let slidePrecedente
+    if (index === 0) {
+        index = lastItem 
+    } else {
+        index--
+    }
+    // Aggiungo la classe active alla slide precedente
+    slidePrecedente = slidesElement [index];
+    // console.log(slidePrecedente)
+    slidePrecedente.classList.add('active')
+})	
+	
 
 
-	
-	
+
+
+
+
+
+
+
 
 
 
